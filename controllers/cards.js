@@ -35,7 +35,12 @@ module.exports.deleteCard = (req, res) => {
     }
     return res.status(OK_STATUS_CODE).send({ data: card })
   })
-  .catch(_err => res.status(INTERNAL_SERVER_ERROR_STATUS_CODE).send({ message: 'Произошла ошибка на сервере' }))
+  .catch(err => {
+    if (err.name === 'CastError') {
+      return res.status(BAD_REQUEST_STATUS_CODE).send({ message: 'Переданы некорректные данные при удалении карточки' });
+    }
+    return res.status(INTERNAL_SERVER_ERROR_STATUS_CODE).send({ message: 'Произошла ошибка на сервере' });
+  });
 }
 
 module.exports.addLike = (req, res) => {
@@ -66,7 +71,7 @@ module.exports.removeLike = (req, res) => {
     if (!card) {
       return res.status(NOT_FOUND_STATUS_CODE).send({ message: 'Запрашиваемая карточка не найдена' });
     }
-    return res.status(CREATED_STATUS_CODE).send({ data: card });
+    return res.status(OK_STATUS_CODE).send({ data: card });
   })
   .catch(err => {
     if (err.name === 'CastError') {
