@@ -11,7 +11,7 @@ const {
 module.exports.getUsers = (_req, res) => {
   User.find({})
   .then(user => res.status(OK_STATUS_CODE).send({ data: user }))
-  .catch(_err => res.status(INTERNAL_SERVER_ERROR_STATUS_CODE).send({ message: 'Произошла ошибка на сервере' }))
+  .catch(_err => res.status(INTERNAL_SERVER_ERROR_STATUS_CODE).send({ message: 'На сервере произошла ошибка' }))
 }
 
 module.exports.getUser = (req, res) => {
@@ -26,7 +26,7 @@ module.exports.getUser = (req, res) => {
     if (err.name === 'CastError') {
       return res.status(BAD_REQUEST_STATUS_CODE).send({ message: 'Переданы некорректные данные при запросе пользователя' });
     }
-    return res.status(INTERNAL_SERVER_ERROR_STATUS_CODE).send({ message: 'Произошла ошибка на сервере' });
+    return res.status(INTERNAL_SERVER_ERROR_STATUS_CODE).send({ message: 'На сервере произошла ошибка' });
   });
 }
 
@@ -38,7 +38,7 @@ module.exports.createUser = (req, res) => {
     if (err.name === 'ValidationError') {
       return res.status(BAD_REQUEST_STATUS_CODE).send({ message: 'Переданы некорректные данные при создании пользователя' });
     }
-    return res.status(INTERNAL_SERVER_ERROR_STATUS_CODE).send({ message: 'Произошла ошибка на сервере' });
+    return res.status(INTERNAL_SERVER_ERROR_STATUS_CODE).send({ message: 'На сервере произошла ошибка' });
   });
 }
 
@@ -55,7 +55,7 @@ module.exports.editProfileUserInfo = (req, res) => {
     if (err.name === 'ValidationError') {
       return res.status(BAD_REQUEST_STATUS_CODE).send({ message: 'Переданы некорректные данные при редактировании пользователя' });
     }
-    return res.status(INTERNAL_SERVER_ERROR_STATUS_CODE).send({ message: 'Произошла ошибка на сервере' });
+    return res.status(INTERNAL_SERVER_ERROR_STATUS_CODE).send({ message: 'На сервере произошла ошибка' });
   });
 }
 module.exports.editProfileUserAvatar = (req, res) => {
@@ -71,6 +71,6 @@ module.exports.editProfileUserAvatar = (req, res) => {
     if (err.name === 'ValidationError') {
       return res.status(BAD_REQUEST_STATUS_CODE).send({ message: 'Переданы некорректные данные при редактировании аватара' });
     }
-    return res.status(INTERNAL_SERVER_ERROR_STATUS_CODE).send({ message: 'Произошла ошибка на сервере' });
+    return res.status(INTERNAL_SERVER_ERROR_STATUS_CODE).send({ message: 'На сервере произошла ошибка' });
   });
 }

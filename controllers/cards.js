@@ -11,7 +11,7 @@ const {
 module.exports.getCards = (_req, res) => {
   Card.find({})
   .then(card => res.status(OK_STATUS_CODE).send({ data: card }))
-  .catch(_err => res.status(INTERNAL_SERVER_ERROR_STATUS_CODE).send({ message: 'Произошла ошибка на сервере' }))
+  .catch(_err => res.status(INTERNAL_SERVER_ERROR_STATUS_CODE).send({ message: 'На сервере произошла ошибка' }))
 }
 
 module.exports.createCard = (req, res) => {
@@ -23,7 +23,7 @@ module.exports.createCard = (req, res) => {
     if (err.name === 'ValidationError') {
       return res.status(BAD_REQUEST_STATUS_CODE).send({ message: 'Переданы некорректные данные при создании карточки' });
     }
-    return res.status(INTERNAL_SERVER_ERROR_STATUS_CODE).send({ message: 'Произошла ошибка на сервере' });
+    return res.status(INTERNAL_SERVER_ERROR_STATUS_CODE).send({ message: 'На сервере произошла ошибка' });
   });
 }
 
@@ -39,7 +39,7 @@ module.exports.deleteCard = (req, res) => {
     if (err.name === 'CastError') {
       return res.status(BAD_REQUEST_STATUS_CODE).send({ message: 'Переданы некорректные данные при удалении карточки' });
     }
-    return res.status(INTERNAL_SERVER_ERROR_STATUS_CODE).send({ message: 'Произошла ошибка на сервере' });
+    return res.status(INTERNAL_SERVER_ERROR_STATUS_CODE).send({ message: 'На сервере произошла ошибка' });
   });
 }
 
@@ -58,7 +58,7 @@ module.exports.addLike = (req, res) => {
     if (err.name === 'CastError') {
       return res.status(BAD_REQUEST_STATUS_CODE).send({ message: 'Переданы некорректные данные при постановке лайка' });
     }
-    return res.status(INTERNAL_SERVER_ERROR_STATUS_CODE).send({ message: 'Произошла ошибка на сервере' });
+    return res.status(INTERNAL_SERVER_ERROR_STATUS_CODE).send({ message: 'На сервере произошла ошибка' });
   });
 }
 
@@ -77,6 +77,6 @@ module.exports.removeLike = (req, res) => {
     if (err.name === 'CastError') {
       return res.status(BAD_REQUEST_STATUS_CODE).send({ message: 'Переданы некорректные данные при удалении лайка' });
     }
-    return res.status(INTERNAL_SERVER_ERROR_STATUS_CODE).send({ message: 'Произошла ошибка на сервере' });
+    return res.status(INTERNAL_SERVER_ERROR_STATUS_CODE).send({ message: 'На сервере произошла ошибка' });
   });
 }

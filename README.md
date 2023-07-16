@@ -17,4 +17,4 @@
 * Удаление выбранной карточки;
 * Постановка и удаления "лайка" выбранной карточки;
 ## Ссылка на проект:
-* [Ссылка на проект](https://ivanyurlov.github.io/express-mesto-gha/)
+* [Ссылка на проект](https://github.com/ivanyurlov/express-mesto-gha)
