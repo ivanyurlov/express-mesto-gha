@@ -3,7 +3,6 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const { AuthorizationError } = require('../utils/handleErrors/authorization-err');
 
-
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -37,10 +36,8 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    minlength: 4,
     select: false,
-    default: 'password',
-  }
+  },
 });
 
 // eslint-disable-next-line func-names
