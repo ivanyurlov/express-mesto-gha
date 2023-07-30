@@ -54,7 +54,7 @@ module.exports.getCurrentUser = (req, res, next) => {
 }
 
 module.exports.createUser = (req, res, next) => {
-  const { name, about, avatar, email, password } = req.body;
+  const { name, about, avatar, email } = req.body;
   bcrypt.hash(req.body.password, 10).then(hash => User.create({
     name,
     about,
@@ -62,7 +62,10 @@ module.exports.createUser = (req, res, next) => {
     email,
     password: hash,
   }))
-  .then(user => res.status(CREATED_STATUS_CODE).send({ data: user }))
+  .then(user => res.status(CREATED_STATUS_CODE).send({
+    _id: user._id,
+    email: user.email
+  }))
   // eslint-disable-next-line consistent-return
   .catch(err => {
     if (err.name === 'ValidationError') {
