@@ -6,7 +6,11 @@ const { getUsers, getUser, getCurrentUser, editProfileUserInfo, editProfileUserA
 
 usersRoutes.get('/users', getUsers);
 usersRoutes.get('/users/me', getCurrentUser);
-usersRoutes.get('/users/:_id', getUser);
+usersRoutes.get('/users/:_id', celebrate({
+  params: Joi.object().keys({
+    _id: Joi.string().alphanum().length(24),
+  }),
+}), getUser);
 usersRoutes.patch('/users/me', celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),

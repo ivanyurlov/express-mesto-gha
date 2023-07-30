@@ -10,9 +10,21 @@ cardsRoutes.post('/cards', celebrate({
     link: Joi.string().required().pattern(URL_REGEXP),
   }),
 }), createCard);
-cardsRoutes.delete('/cards/:_id', deleteCard);
-cardsRoutes.put('/cards/:_id/likes', addLike);
-cardsRoutes.delete('/cards/:_id/likes', removeLike);
+cardsRoutes.delete('/cards/:_id', celebrate({
+  params: Joi.object().keys({
+    _id: Joi.string().alphanum().length(24),
+  }),
+}), deleteCard);
+cardsRoutes.put('/cards/:_id/likes', celebrate({
+  params: Joi.object().keys({
+    _id: Joi.string().alphanum().length(24),
+  }),
+}), addLike);
+cardsRoutes.delete('/cards/:_id/likes', celebrate({
+  params: Joi.object().keys({
+    _id: Joi.string().alphanum().length(24),
+  }),
+}), removeLike);
 
 module.exports = {
   cardsRoutes
