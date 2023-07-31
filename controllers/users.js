@@ -123,5 +123,5 @@ module.exports.login = (req, res, next) => {
 
       return res.status(OK_STATUS_CODE).send({ token });
     })
-    .catch(next);
+    .catch((err) => next(err));
 };
