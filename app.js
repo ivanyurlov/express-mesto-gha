@@ -10,6 +10,7 @@ const NotFoundError = require('./utils/handleErrors/not-found-err');
 const { createUser, login } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const { URL_REGEXP } = require('./utils/regexp');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
 
@@ -20,6 +21,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
 const app = express();
 
 app.use(express.json());
+app.use(requestLogger);
 app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().email().required(),
@@ -40,6 +42,7 @@ app.use(usersRoutes);
 app.use(cardsRoutes);
 
 app.use('*', (_req, _res, next) => next(new NotFoundError('Страница не найдена')));
+app.use(errorLogger);
 app.use(errors());
 
 app.use((err, _req, res, next) => {
